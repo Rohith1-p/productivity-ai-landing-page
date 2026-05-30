@@ -16,7 +16,8 @@
       margin: 0 auto;
       padding: 120px 24px 80px;
       font-family: 'Outfit', sans-serif;
-      color: #1a1a2e;
+      color: #101828;
+      background: #f7f6fb;
       line-height: 1.75;
     }
 
@@ -27,7 +28,7 @@
     }
 
     .legal-page .updated {
-      color: #666;
+      color: #667085;
       font-size: 0.95rem;
       margin-bottom: 48px;
     }
@@ -69,12 +70,22 @@
 
     @media (prefers-color-scheme: dark) {
       .legal-page {
-        color: #e0e0e0;
+        color: #f4f4f8;
+        background: #1a1f29;
       }
 
       .legal-page .updated {
-        color: #999;
+        color: #a0a7b4;
       }
+    }
+
+    body.dark-mode .legal-page {
+      color: #f4f4f8;
+      background: #1a1f29;
+    }
+
+    body.dark-mode .legal-page .updated {
+      color: #a0a7b4;
     }
   </style>
 </head>
