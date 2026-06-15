@@ -84,7 +84,10 @@
 <body>
   <header class="nav">
     <div class="container nav-inner">
-      <div class="logo">Plan Todo</div>
+      <div class="logo">
+        <img src="logo.png" alt="Plan Todo logo" class="logo-icon" />
+        <span>Plan Todo</span>
+      </div>
       <nav class="nav-links">
         <a href="#features">Features</a>
         <a href="#screenshots">Screenshots</a>
@@ -207,6 +210,19 @@
       </div>
     </section>
 
+    <div class="waitlist-banner-wrap">
+      <div class="container waitlist-banner-simple">
+        <h3>Join the Waitlist</h3>
+        <form class="waitlist-form waitlist-mini">
+          <div class="waitlist-fields">
+            <input type="email" placeholder="Email Address" required aria-label="Email Address" />
+            <button type="submit">Join Waitlist</button>
+          </div>
+          <p class="waitlist-message"></p>
+        </form>
+      </div>
+    </div>
+
 
     <section id="how-it-works" class="section section-muted">
       <div class="container workflow-grid">
@@ -290,6 +306,19 @@
       </div>
     </section>
 
+    <div class="waitlist-banner-wrap">
+      <div class="container waitlist-banner-simple">
+        <h3>Join the Waitlist</h3>
+        <form class="waitlist-form waitlist-mini">
+          <div class="waitlist-fields">
+            <input type="email" placeholder="Email Address" required aria-label="Email Address" />
+            <button type="submit">Join Waitlist</button>
+          </div>
+          <p class="waitlist-message"></p>
+        </form>
+      </div>
+    </div>
+
     <section id="screenshots" class="section section-muted">
       <div class="container">
         <div class="section-title">
@@ -324,6 +353,19 @@
         </div>
       </div>
     </section>
+
+    <div class="waitlist-banner-wrap">
+      <div class="container waitlist-banner-simple">
+        <h3>Join the Waitlist</h3>
+        <form class="waitlist-form waitlist-mini">
+          <div class="waitlist-fields">
+            <input type="email" placeholder="Email Address" required aria-label="Email Address" />
+            <button type="submit">Join Waitlist</button>
+          </div>
+          <p class="waitlist-message"></p>
+        </form>
+      </div>
+    </div>
 
     <section id="testimonials" class="section">
       <div class="container">
@@ -374,6 +416,19 @@
         </div>
       </div>
     </section>
+
+    <div class="waitlist-banner-wrap">
+      <div class="container waitlist-banner-simple">
+        <h3>Join the Waitlist</h3>
+        <form class="waitlist-form waitlist-mini">
+          <div class="waitlist-fields">
+            <input type="email" placeholder="Email Address" required aria-label="Email Address" />
+            <button type="submit">Join Waitlist</button>
+          </div>
+          <p class="waitlist-message"></p>
+        </form>
+      </div>
+    </div>
 
     <section id="faq" class="section section-muted">
       <div class="container faq">
@@ -475,54 +530,55 @@
       });
     }
 
-    // Supabase waitlist form
+    // Supabase waitlist — handles all forms on the page
     const SUPABASE_URL = "https://hhkpzekbmkozbqtbehef.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhoa3B6ZWtibWtvemJxdGJlaGVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2MjI1MDcsImV4cCI6MjA3OTE5ODUwN30.zAmP3xXlpC_P1FO8rUqrZZVDLOfXtGBIYT6N0xknfg8";
 
-    const waitlistForm = document.getElementById("waitlist-form");
-    const waitlistEmail = document.getElementById("waitlist-email");
-    const waitlistSubmit = document.getElementById("waitlist-submit");
-    const waitlistMessage = document.getElementById("waitlist-message");
+    document.querySelectorAll(".waitlist-form").forEach((form) => {
+      const email = form.querySelector("input[type='email']");
+      const submit = form.querySelector("button[type='submit']");
+      const message = form.querySelector(".waitlist-message");
 
-    waitlistForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = waitlistEmail.value.trim();
-      if (!email) return;
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const emailValue = email.value.trim();
+        if (!emailValue) return;
 
-      waitlistSubmit.disabled = true;
-      waitlistSubmit.textContent = "Joining...";
-      waitlistMessage.textContent = "";
-      waitlistMessage.className = "waitlist-message";
+        submit.disabled = true;
+        submit.textContent = "Joining...";
+        message.textContent = "";
+        message.className = "waitlist-message";
 
-      try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "apikey": SUPABASE_ANON_KEY,
-            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
-          },
-          body: JSON.stringify({ email })
-        });
+        try {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": SUPABASE_ANON_KEY,
+              "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+            },
+            body: JSON.stringify({ email: emailValue })
+          });
 
-        if (res.status === 201) {
-          waitlistMessage.textContent = "You're on the list! We'll notify you when Plan Todo launches.";
-          waitlistMessage.className = "waitlist-message success";
-          waitlistEmail.value = "";
-        } else if (res.status === 409) {
-          waitlistMessage.textContent = "You're already on the waitlist!";
-          waitlistMessage.className = "waitlist-message success";
-        } else {
-          waitlistMessage.textContent = "Something went wrong. Please try again.";
-          waitlistMessage.className = "waitlist-message error";
+          if (res.status === 201) {
+            message.textContent = "You're on the list! We'll notify you when Plan Todo launches.";
+            message.className = "waitlist-message success";
+            email.value = "";
+          } else if (res.status === 409) {
+            message.textContent = "You're already on the waitlist!";
+            message.className = "waitlist-message success";
+          } else {
+            message.textContent = "Something went wrong. Please try again.";
+            message.className = "waitlist-message error";
+          }
+        } catch (err) {
+          message.textContent = "Network error. Please check your connection.";
+          message.className = "waitlist-message error";
         }
-      } catch (err) {
-        waitlistMessage.textContent = "Network error. Please check your connection.";
-        waitlistMessage.className = "waitlist-message error";
-      }
 
-      waitlistSubmit.disabled = false;
-      waitlistSubmit.textContent = "Join Waitlist";
+        submit.disabled = false;
+        submit.textContent = "Join Waitlist";
+      });
     });
   </script>
   <script>
