@@ -237,9 +237,9 @@ body.dark-mode .theme-toggle {
 }
 
 .hero-device {
-  width: min(260px, 42vw);
+  width: 100%;
   height: auto;
-  filter: drop-shadow(0 30px 40px rgba(16, 24, 40, 0.2));
+  display: block;
 }
 
 .hero-device-secondary {
@@ -421,10 +421,9 @@ body.dark-mode .theme-toggle {
 }
 
 .features-device {
-  width: min(220px, 30vw);
+  width: 100%;
   height: auto;
-  filter: drop-shadow(0 20px 30px rgba(16, 24, 40, 0.18));
-  border-radius: 28px;
+  display: block;
 }
 
 .features-device-offset {
@@ -838,14 +837,14 @@ body.dark-mode .theme-toggle {
 
 .screenshot-card img {
   width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 0;
+  box-shadow: none;
+  transition: none;
 }
 
 .screenshot-card img:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+  transform: none;
+  box-shadow: none;
 }
 
 .screenshot-card p {
@@ -858,5 +857,161 @@ body.dark-mode .theme-toggle {
 @media (max-width: 768px) {
   .screenshot-gallery {
     grid-template-columns: 1fr;
+  }
+}
+
+/* iPhone Frame */
+.iphone-frame {
+  position: relative;
+  background: #1a1a1a;
+  border-radius: 44px;
+  padding: 12px;
+  box-shadow:
+    0 0 0 2px #333,
+    0 0 0 4px #1a1a1a,
+    0 30px 60px rgba(0, 0, 0, 0.3);
+  width: min(260px, 42vw);
+}
+
+.iphone-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 32px;
+}
+
+/* Dynamic Island */
+.iphone-frame::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 24px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Side buttons */
+.iphone-frame::after {
+  content: "";
+  position: absolute;
+  right: -4px;
+  top: 120px;
+  width: 3px;
+  height: 60px;
+  background: #333;
+  border-radius: 2px;
+  box-shadow:
+    0 -80px 0 #333,
+    0 80px 0 #333;
+}
+
+/* Hero-specific: make sure images inside frames work */
+.hero-visual .iphone-frame {
+  width: min(260px, 42vw);
+}
+
+.hero-visual .hero-device-secondary.iphone-frame {
+  margin-top: 40px;
+}
+
+/* Features-specific */
+.features-visual .iphone-frame {
+  width: min(220px, 30vw);
+}
+
+.features-visual .features-device-offset.iphone-frame {
+  margin-top: 48px;
+}
+
+/* macOS Window Frame */
+.macos-frame {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.macos-frame:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.macos-titlebar {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #e8e8e8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.macos-titlebar span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+}
+
+.macos-titlebar span:nth-child(1) {
+  background: #ff5f57;
+}
+
+.macos-titlebar span:nth-child(2) {
+  background: #ffbd2e;
+}
+
+.macos-titlebar span:nth-child(3) {
+  background: #28c940;
+}
+
+.macos-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+body.dark-mode .macos-frame {
+  background: #2a2a2a;
+}
+
+body.dark-mode .macos-titlebar {
+  background: #3a3a3a;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Remove old screenshot-card img styles that conflict */
+.screenshot-card .macos-frame {
+  border-radius: 12px;
+}
+
+/* Mobile: smaller frames */
+@media (max-width: 600px) {
+  .iphone-frame {
+    width: min(200px, 60vw);
+    border-radius: 36px;
+    padding: 10px;
+  }
+
+  .iphone-frame img {
+    border-radius: 26px;
+  }
+
+  .iphone-frame::before {
+    width: 60px;
+    height: 18px;
+    top: 18px;
+  }
+
+  .features-visual .iphone-frame {
+    width: min(180px, 50vw);
   }
 }
