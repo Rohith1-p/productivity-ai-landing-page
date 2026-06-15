@@ -823,3 +823,40 @@ body.dark-mode .theme-toggle {
     width: 100%;
   }
 }
+
+/* Screenshot Gallery */
+.screenshot-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.screenshot-card {
+  text-align: center;
+}
+
+.screenshot-card img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.screenshot-card img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+.screenshot-card p {
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary, #666);
+}
+
+@media (max-width: 768px) {
+  .screenshot-gallery {
+    grid-template-columns: 1fr;
+  }
+}
