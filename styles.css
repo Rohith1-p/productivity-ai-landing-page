@@ -989,6 +989,55 @@ body.dark-mode .mobile-nav a {
     gap: 20px;
   }
 }
+/* Pouch Mode Video Showcase */
+.pouch-showcase {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  margin-top: 64px;
+  padding: 40px;
+  border-radius: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.pouch-showcase-copy {
+  flex: 1;
+}
+
+.pouch-showcase-copy h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 8px 0 12px;
+}
+
+.pouch-showcase-copy p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.pouch-video {
+  flex: 1;
+  max-width: 360px;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .pouch-showcase {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px;
+    gap: 28px;
+  }
+
+  .pouch-video {
+    max-width: 100%;
+    width: min(320px, 100%);
+  }
+}
+
 /* Waitlist Banner (simple, between sections) */
 .waitlist-banner-wrap {
   padding: 0 0 16px;
