@@ -239,9 +239,15 @@ body.dark-mode .theme-toggle {
   margin-bottom: 26px;
 }
 
-.button-mac {
+.button-mac,
+a.button.button-mac {
   background: #1d1d1f;
   color: #ffffff;
+}
+
+a.button.button-mac:hover {
+  background: #000000;
+  transform: translateY(-1px);
 }
 
 body.dark-mode .button-mac {
