@@ -231,6 +231,29 @@ body.dark-mode .theme-toggle {
   margin-bottom: 30px;
 }
 
+.hero-download {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.button-mac {
+  background: #1d1d1f;
+  color: #ffffff;
+}
+
+body.dark-mode .button-mac {
+  background: #f5f5f7;
+  color: #1d1d1f;
+}
+
+.hero-download-note {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
 .stats {
   display: grid;
   gap: 18px;
